@@ -5,7 +5,7 @@ import { Config } from "./config/env";
 const app = initializeApp();
 RegisterRoutes(app);
 
-const port = Config.port
+const port = Config.port;
 app.listen(port, () => {
-    `Application is running on port ${port}`
-})
+	`Application is running on port ${port}`;
+});
