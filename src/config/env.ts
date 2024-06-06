@@ -10,30 +10,30 @@ export class Config {
 		throw new Error("This is an static class.");
 	}
 
-	static readonly port: number = this.parseInt(this.getFromEnv("PORT"));
+	static readonly port: number = this.parseInt("PORT");
 
-	static readonly nodeEnv: string = this.parseString(
-		this.getFromEnv("NODE_ENV"),
-	);
+	static readonly nodeEnv: string = this.parseString("NODE_ENV");
 
 	private static getFromEnv(key: string) {
 		return process.env[key];
 	}
 
-	private static parseInt(value: string | undefined): number {
+	private static parseInt(key: string): number {
+		const value = this.getFromEnv(key);
 		if (!value) {
-			throw new Error("Some integer Config is missing");
+			throw new Error(`Config missing: ${key}`);
 		}
 		const parsedValue = parseInt(value);
 		if (isNaN(parsedValue)) {
-			throw new Error("THis config is not of correct type");
+			throw new Error("This config is not of correct type");
 		}
 		return parsedValue;
 	}
 
-	private static parseString(value: string | undefined): string {
+	private static parseString(key: string): string {
+		const value = this.getFromEnv(key);
 		if (!value) {
-			throw new Error("Some string Config is missing");
+			throw new Error(`Config missing: ${key}`);
 		}
 		return value;
 	}
