@@ -7,8 +7,10 @@ import {
 } from "./common/requestHandlers/expressError";
 import { Request, Response } from "express";
 import swaggerUi from "swagger-ui-express";
+import morgan from "morgan";
 
 const app = initializeApp();
+Config.logging ? app.use(morgan("dev")) : null;
 RegisterRoutes(app);
 
 const port = Config.port;

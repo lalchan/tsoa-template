@@ -14,6 +14,8 @@ export class Config {
 
 	static readonly nodeEnv: string = this.parseString("NODE_ENV");
 
+	static logging: boolean = this.parseAsBoolean("LOGGING");
+
 	private static getFromEnv(key: string) {
 		return process.env[key];
 	}
@@ -36,5 +38,13 @@ export class Config {
 			throw new Error(`Config missing: ${key}`);
 		}
 		return value;
+	}
+
+	private static parseAsBoolean(key: string): boolean {
+		const value = this.getFromEnv(key);
+		if (!value) {
+			throw new Error(`Config missing: ${key}`);
+		}
+		return value === "true";
 	}
 }
