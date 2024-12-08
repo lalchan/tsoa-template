@@ -1,4 +1,5 @@
 import { config } from "dotenv";
+
 import { join } from "path";
 
 config({
@@ -10,11 +11,11 @@ export class Config {
 		throw new Error("This is an static class.");
 	}
 
-	static readonly port: number = this.parseInt("PORT");
-
-	static readonly nodeEnv: string = this.parseString("NODE_ENV");
-
-	static logging: boolean = this.parseAsBoolean("LOGGING");
+	static readonly app = {
+		env: this.parseString("APP_ENV"),
+		port: this.parseInt("APP_PORT"),
+		logging: this.parseAsBoolean("APP_LOGGING"),
+	};
 
 	private static getFromEnv(key: string) {
 		return process.env[key];

@@ -10,10 +10,10 @@ import swaggerUi from "swagger-ui-express";
 import morgan from "morgan";
 
 const app = initializeApp();
-Config.logging ? app.use(morgan("dev")) : null;
+Config.app.logging ? app.use(morgan("dev")) : null;
 RegisterRoutes(app);
 
-const port = Config.port;
+const port = Config.app.port;
 
 app.use("/docs", swaggerUi.serve, async (_req: Request, res: Response) => {
 	return res.send(
